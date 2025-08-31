@@ -1,0 +1,5 @@
+{
+  "name": "AI-Powered Development Tool",
+  "description": "A collaborative, AI-powered tool to generate code from natural language prompts. Describe your desired app or logic, and let Gemini build it for you.",
+  "requestFramePermissions": []
+}

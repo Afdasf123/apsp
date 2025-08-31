@@ -1,0 +1,61 @@
+<main class="min-h-screen bg-gray-900 text-gray-200 font-sans p-4 sm:p-6 lg:p-8">
+  <div class="max-w-6xl mx-auto">
+    <header class="flex flex-col sm:flex-row items-center justify-between mb-10 gap-6">
+      <div class="text-center sm:text-left">
+         <div class="inline-block bg-indigo-500/10 p-3 rounded-xl mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3" />
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14a2 2 0 100-4 2 2 0 000 4z" />
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+         </div>
+         <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            AI-Powered Development Tool
+         </h1>
+         <p class="mt-3 text-lg text-gray-400 max-w-2xl">
+            Describe your app or logic in plain English, and let Gemini craft the code for you.
+         </p>
+      </div>
+      <div class="flex-shrink-0 flex items-center gap-4 bg-gray-800/50 border border-gray-700 p-3 rounded-lg">
+         <div class="flex items-center -space-x-3">
+            @for (collaborator of collaborators(); track collaborator.id) {
+            <div class="relative group">
+               <img
+                  class="h-10 w-10 rounded-full border-2 border-gray-700 object-cover cursor-pointer"
+                  [src]="collaborator.avatarUrl"
+                  [alt]="collaborator.name"
+                  />
+               <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                  {{ collaborator.name }}
+               </div>
+            </div>
+            }
+         </div>
+         <button (click)="inviteCollaborator()" class="inline-flex items-center gap-2 px-4 py-2 border border-gray-600 text-sm font-medium rounded-md shadow-sm text-gray-300 bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-indigo-500 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+               <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 11a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1v-1z" />
+            </svg>
+            <span>Invite</span>
+         </button>
+      </div>
+    </header>
+
+    <div class="flex flex-col gap-8">
+      <app-prompt-editor 
+        [isLoading]="isLoading()"
+        (generate)="handleGenerate($event)"
+      ></app-prompt-editor>
+
+      <app-code-viewer 
+        [code]="generatedCode()"
+        [isLoading]="isLoading()"
+        [hasError]="!!error()"
+        [errorMessage]="error()"
+      ></app-code-viewer>
+    </div>
+
+    <footer class="text-center mt-12 text-gray-500 text-sm">
+      <p>Powered by Angular and Google Gemini</p>
+    </footer>
+  </div>
+</main>
